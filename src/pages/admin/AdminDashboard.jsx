@@ -11,7 +11,7 @@ import HomeworkTab   from "./HomeworkTab.jsx";
 import RatingsTab    from "./RatingsTab.jsx";
 import CoursesTab    from "./CoursesTab.jsx";
 import RoomsTab      from "./RoomsTab.jsx";
-import StaffTab      from "./StaffTab.jsx";
+import StaffTab      from "./Stafftab.jsx";
 import { Spinner }   from "../../components/ui/index.jsx";
 import { teacherApi, studentApi, userApi, groupApi } from "../../api/apiService.js";
 
@@ -28,6 +28,9 @@ function PlaceholderTab({ title }) {
     </Box>
   );
 }
+
+
+
 
 export default function AdminDashboard({ user, onLogout }) {
   const navigate        = useNavigate();
