@@ -7,7 +7,6 @@ import DashboardTab  from "./DashboardTab.jsx";
 import TeachersTab   from "./TeachersTab.jsx";
 import StudentsTab   from "./StudentsTab.jsx";
 import GroupsTab     from "./GroupsTab.jsx";
-import HomeworkTab   from "./HomeworkTab.jsx";
 import RatingsTab    from "./RatingsTab.jsx";
 import CoursesTab    from "./CoursesTab.jsx";
 import RoomsTab      from "./RoomsTab.jsx";
@@ -17,7 +16,7 @@ import { teacherApi, studentApi, userApi, groupApi } from "../../api/apiService.
 
 const VALID_TABS = [
   "dashboard", "teachers", "students", "groups",
-  "courses", "rooms", "homework", "ratings",
+  "courses", "rooms", "ratings",
   "filial", "staff", "faq", "verify", "settings",
 ];
 
@@ -89,7 +88,6 @@ export default function AdminDashboard({ user, onLogout }) {
       case "groups":    return <GroupsTab />;
       case "courses":   return <CoursesTab />;
       case "rooms":     return <RoomsTab />;
-      case "homework":  return <HomeworkTab />;
       case "ratings":   return <RatingsTab />;
       case "staff":     return <StaffTab />;
       case "filial":    return <PlaceholderTab title="Filial" />;

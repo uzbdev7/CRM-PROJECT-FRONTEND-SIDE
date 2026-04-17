@@ -11,7 +11,6 @@ import PeopleAltRoundedIcon       from "@mui/icons-material/PeopleAltRounded";
 import GroupsRoundedIcon          from "@mui/icons-material/GroupsRounded";
 import SettingsRoundedIcon        from "@mui/icons-material/SettingsRounded";
 import ManageAccountsRoundedIcon  from "@mui/icons-material/ManageAccountsRounded";
-import HomeWorkRoundedIcon        from "@mui/icons-material/HomeWorkRounded";
 import LeaderboardRoundedIcon     from "@mui/icons-material/LeaderboardRounded";
 import MenuBookRoundedIcon        from "@mui/icons-material/MenuBookRounded";
 import MeetingRoomRoundedIcon     from "@mui/icons-material/MeetingRoomRounded";
@@ -21,18 +20,25 @@ import ChevronLeftRoundedIcon     from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon    from "@mui/icons-material/ChevronRightRounded";
 import ChevronRightIcon           from "@mui/icons-material/ChevronRight";
 import BadgeRoundedIcon           from "@mui/icons-material/BadgeRounded";
+import { API_BASE }               from "../../utils/constants.js";
 
 const FULL_W    = 240;
 const MINI_W    = 68;
 const ACCENT    = "#7c3aed";
 const ACCENT_BG = "#f5f3ff";
 
+const toPhotoUrl = (path) => {
+  if (!path) return null;
+  if (path.startsWith("http")) return path;
+  const clean = path.replace(/\\/g, "/").replace(/^\/+/, "");
+  return `${API_BASE.replace(/\/api\/?$/, "")}/${clean}`;
+};
+
 const NAV = [
   { id: "dashboard", label: "Asosiy",        Icon: DashboardRoundedIcon },
   { id: "teachers",  label: "O'qituvchilar", Icon: SchoolRoundedIcon },
   { id: "students",  label: "Talabalar",     Icon: PeopleAltRoundedIcon },
   { id: "groups",    label: "Guruhlar",      Icon: GroupsRoundedIcon },
-  { id: "homework",  label: "Uy vazifalari", Icon: HomeWorkRoundedIcon },
   { id: "ratings",   label: "Reytinglar",    Icon: LeaderboardRoundedIcon },
   {
     id: "manage",
@@ -52,7 +58,6 @@ export const TAB_TITLES = {
   teachers:  "O'qituvchilar",
   students:  "Talabalar",
   groups:    "Guruhlar",
-  homework:  "Uy vazifalari",
   ratings:   "Reytinglar",
   courses:   "Kurslar",
   rooms:     "Xonalar",
@@ -104,8 +109,8 @@ function Sidebar({ user, tab, setTab, collapsed, setCollapsed, onLogout, onClose
       {!collapsed ? (
         <Box sx={{ px: 2, py: 1.5, borderBottom: "1px solid #f3f4f6" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, p: 1.2, borderRadius: 2, bgcolor: "#fafafa" }}>
-            <Avatar sx={{ width: 32, height: 32, bgcolor: ACCENT, fontSize: 13, fontWeight: 700 }}>
-              {user?.fullName?.[0] || "U"}
+            <Avatar src={toPhotoUrl(user?.photo) || undefined} sx={{ width: 32, height: 32, bgcolor: ACCENT, fontSize: 13, fontWeight: 700 }}>
+              {!toPhotoUrl(user?.photo) ? (user?.fullName?.[0] || "U") : null}
             </Avatar>
             <Box sx={{ minWidth: 0, flex: 1 }}>
               <Typography sx={{
@@ -124,8 +129,8 @@ function Sidebar({ user, tab, setTab, collapsed, setCollapsed, onLogout, onClose
         </Box>
       ) : (
         <Box sx={{ py: 1.5, display: "flex", justifyContent: "center", borderBottom: "1px solid #f3f4f6" }}>
-          <Avatar sx={{ width: 32, height: 32, bgcolor: ACCENT, fontSize: 13, fontWeight: 700 }}>
-            {user?.fullName?.[0] || "U"}
+          <Avatar src={toPhotoUrl(user?.photo) || undefined} sx={{ width: 32, height: 32, bgcolor: ACCENT, fontSize: 13, fontWeight: 700 }}>
+            {!toPhotoUrl(user?.photo) ? (user?.fullName?.[0] || "U") : null}
           </Avatar>
         </Box>
       )}
@@ -376,8 +381,8 @@ export default function AdminLayout({ user, onLogout, children, tab, setTab }) {
               fontWeight: 700, fontSize: 11,
               border: "1px solid #bbf7d0",
             }} />
-            <Avatar sx={{ width: 32, height: 32, bgcolor: ACCENT, fontSize: 13, fontWeight: 700 }}>
-              {user?.fullName?.[0] || "U"}
+            <Avatar src={toPhotoUrl(user?.photo) || undefined} sx={{ width: 32, height: 32, bgcolor: ACCENT, fontSize: 13, fontWeight: 700 }}>
+              {!toPhotoUrl(user?.photo) ? (user?.fullName?.[0] || "U") : null}
             </Avatar>
           </Toolbar>
         </AppBar>
